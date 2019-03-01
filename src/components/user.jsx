@@ -19,7 +19,14 @@ class User extends Component {
           >
             Edit
           </Button>
-          <Button color="danger" size="sm">
+          <Button
+            color="danger"
+            size="sm"
+            onClick={() => {
+              if (window.confirm("Are you sure you wish to delete this item?"))
+                this.props.deleteUser(this.props.user.id);
+            }}
+          >
             Delete
           </Button>
         </td>

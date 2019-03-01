@@ -24,6 +24,7 @@ class App extends Component {
     this.toggleNewUserModal = this.toggleNewUserModal.bind(this);
     this.addUser = this.addUser.bind(this);
     this.editUser = this.editUser.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
   }
 
   componentDidMount() {
@@ -74,6 +75,13 @@ class App extends Component {
         //users.push(res.data);
         //his.setState({ users });
       });
+  }
+  deleteUser(userId) {
+    console.log(userId);
+    axios.delete("https://reqres.in/api/users" + userId).then(res => {
+      let users = this.state.users.filter(u => u.id !== userId);
+      this.setState({ users });
+    });
   }
 
   state = {
@@ -192,6 +200,7 @@ class App extends Component {
               <Users
                 users={this.state.users}
                 toggleEditUserModal={this.toggleEditUserModal}
+                deleteUser={this.deleteUser}
               />
             </Collapse>
           </li>

@@ -4,7 +4,7 @@ import User from "./user";
 
 class Users extends Component {
   render() {
-    const { toggleEditUserModal } = this.props;
+    const { toggleEditUserModal, deleteUser } = this.props;
     return (
       <Table>
         <thead>
@@ -22,6 +22,7 @@ class Users extends Component {
               key={user.id}
               user={user}
               toggleEditUserModal={toggleEditUserModal}
+              deleteUser={deleteUser}
             />
           ))}
         </tbody>
