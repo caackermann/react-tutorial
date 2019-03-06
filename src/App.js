@@ -40,16 +40,26 @@ class App extends Component {
   está creado, ya que solo se muestra en la página cuando se recibe la respuesta exitosa de la api.
   */
   getUsers() {
-    axios.get("https://reqres.in/api/users?per_page=12").then(res => {
-      const users = res.data.data;
-      this.setState({ users });
-    });
+    axios
+      .get("https://reqres.in/api/users?per_page=12")
+      .then(res => {
+        const users = res.data.data;
+        this.setState({ users });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
   getResources() {
-    axios.get("https://reqres.in/api/unknown?per_page=12").then(res => {
-      const resources = res.data.data;
-      this.setState({ resources });
-    });
+    axios
+      .get("https://reqres.in/api/unknown?per_page=12")
+      .then(res => {
+        const resources = res.data.data;
+        this.setState({ resources });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
   addUser() {
     axios
@@ -62,6 +72,9 @@ class App extends Component {
           newUserModal: false,
           newUserData: { first_name: "", last_name: "" }
         });
+      })
+      .catch(error => {
+        console.log(error);
       });
   }
   editUser(user) {
@@ -74,14 +87,22 @@ class App extends Component {
         this.setState({ editUserModal: false });
         //users.push(res.data);
         //his.setState({ users });
+      })
+      .catch(error => {
+        console.log(error);
       });
   }
   deleteUser(userId) {
     console.log(userId);
-    axios.delete("https://reqres.in/api/users" + userId).then(res => {
-      let users = this.state.users.filter(u => u.id !== userId);
-      this.setState({ users });
-    });
+    axios
+      .delete("https://reqres.in/api/users" + userId)
+      .then(res => {
+        let users = this.state.users.filter(u => u.id !== userId);
+        this.setState({ users });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   state = {
