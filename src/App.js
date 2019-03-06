@@ -13,6 +13,7 @@ import {
   Label,
   Input
 } from "reactstrap";
+import Navbar from "./components/navbar";
 
 class App extends Component {
   constructor(props) {
@@ -125,114 +126,122 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App container">
-        <Modal
-          isOpen={this.state.newUserModal}
-          toggle={this.toggleNewUserModal}
-        >
-          <ModalHeader toggle={this.toggleNewUserModal}>
-            Add a new user
-          </ModalHeader>
-          <ModalBody>
-            <FormGroup>
-              <Label for="first_name">First Name:</Label>
-              <Input
-                type="text"
-                id="first_name"
-                value={this.state.newUserData.first_name}
-                onChange={input => {
-                  let { newUserData } = this.state;
-                  newUserData.first_name = input.target.value;
-                  this.setState(newUserData);
-                }}
-              />
-              <Label for="last_name">Last Name:</Label>
-              <Input
-                type="text"
-                id="last_name"
-                value={this.state.newUserData.last_name}
-                onChange={input => {
-                  let { newUserData } = this.state;
-                  newUserData.last_name = input.target.value;
-                  this.setState(newUserData);
-                }}
-              />
-            </FormGroup>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.addUser}>
-              Add User
-            </Button>
-            <Button color="secondary" onClick={this.toggleNewUserModal}>
-              Cancel
-            </Button>
-          </ModalFooter>
-        </Modal>
-        <Modal
-          isOpen={this.state.editUserModal}
-          toggle={this.toggleEditUserModal}
-        >
-          <ModalHeader toggle={this.toggleEditUserModal}>Edit user</ModalHeader>
-          <ModalBody>
-            <FormGroup>
-              <Label for="first_name">First Name:</Label>
-              <Input
-                type="text"
-                id="first_name"
-                value={this.state.editUserData.first_name}
-                placeholder={this.state.editUserData.first_name}
-                onChange={input => {
-                  let { editUserData } = this.state;
-                  editUserData.first_name = input.target.value;
-                  this.setState(editUserData);
-                }}
-              />
-              <Label for="last_name">Last Name:</Label>
-              <Input
-                type="text"
-                id="last_name"
-                value={this.state.editUserData.last_name}
-                placeholder={this.state.editUserData.last_name}
-                onChange={input => {
-                  let { editUserData } = this.state;
-                  editUserData.last_name = input.target.value;
-                  this.setState(editUserData);
-                }}
-              />
-            </FormGroup>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.editUser}>
-              Edit User
-            </Button>
-            <Button color="secondary" onClick={this.toggleEditUserModal}>
-              Cancel
-            </Button>
-          </ModalFooter>
-        </Modal>
-        <ul className="m-2">
-          <li className="m-2">
-            <Button onClick={this.usersToggle}>All Users</Button>
-            <Button color="success ml-2 mr-2" onClick={this.toggleNewUserModal}>
-              Add User
-            </Button>
+      <React.Fragment>
+        <Navbar />
+        <div className="App container">
+          <Modal
+            isOpen={this.state.newUserModal}
+            toggle={this.toggleNewUserModal}
+          >
+            <ModalHeader toggle={this.toggleNewUserModal}>
+              Add a new user
+            </ModalHeader>
+            <ModalBody>
+              <FormGroup>
+                <Label for="first_name">First Name:</Label>
+                <Input
+                  type="text"
+                  id="first_name"
+                  value={this.state.newUserData.first_name}
+                  onChange={input => {
+                    let { newUserData } = this.state;
+                    newUserData.first_name = input.target.value;
+                    this.setState(newUserData);
+                  }}
+                />
+                <Label for="last_name">Last Name:</Label>
+                <Input
+                  type="text"
+                  id="last_name"
+                  value={this.state.newUserData.last_name}
+                  onChange={input => {
+                    let { newUserData } = this.state;
+                    newUserData.last_name = input.target.value;
+                    this.setState(newUserData);
+                  }}
+                />
+              </FormGroup>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={this.addUser}>
+                Add User
+              </Button>
+              <Button color="secondary" onClick={this.toggleNewUserModal}>
+                Cancel
+              </Button>
+            </ModalFooter>
+          </Modal>
+          <Modal
+            isOpen={this.state.editUserModal}
+            toggle={this.toggleEditUserModal}
+          >
+            <ModalHeader toggle={this.toggleEditUserModal}>
+              Edit user
+            </ModalHeader>
+            <ModalBody>
+              <FormGroup>
+                <Label for="first_name">First Name:</Label>
+                <Input
+                  type="text"
+                  id="first_name"
+                  value={this.state.editUserData.first_name}
+                  placeholder={this.state.editUserData.first_name}
+                  onChange={input => {
+                    let { editUserData } = this.state;
+                    editUserData.first_name = input.target.value;
+                    this.setState(editUserData);
+                  }}
+                />
+                <Label for="last_name">Last Name:</Label>
+                <Input
+                  type="text"
+                  id="last_name"
+                  value={this.state.editUserData.last_name}
+                  placeholder={this.state.editUserData.last_name}
+                  onChange={input => {
+                    let { editUserData } = this.state;
+                    editUserData.last_name = input.target.value;
+                    this.setState(editUserData);
+                  }}
+                />
+              </FormGroup>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={this.editUser}>
+                Edit User
+              </Button>
+              <Button color="secondary" onClick={this.toggleEditUserModal}>
+                Cancel
+              </Button>
+            </ModalFooter>
+          </Modal>
+          <ul className="m-2">
+            <li className="m-2">
+              <Button onClick={this.usersToggle}>All Users</Button>
+              <Button
+                color="success ml-2 mr-2"
+                onClick={this.toggleNewUserModal}
+              >
+                Add User
+              </Button>
 
-            <Collapse isOpen={this.state.usersCollapse}>
-              <Users
-                users={this.state.users}
-                toggleEditUserModal={this.toggleEditUserModal}
-                deleteUser={this.deleteUser}
-              />
-            </Collapse>
-          </li>
-          <li className="m-2">
-            <Button onClick={this.resourcesToggle}>All Resources</Button>
-            <Collapse isOpen={this.state.resCollapse}>
-              <Resources resources={this.state.resources} />
-            </Collapse>
-          </li>
-        </ul>
-      </div>
+              <Collapse isOpen={this.state.usersCollapse}>
+                <Users
+                  users={this.state.users}
+                  toggleEditUserModal={this.toggleEditUserModal}
+                  deleteUser={this.deleteUser}
+                />
+              </Collapse>
+            </li>
+            <li className="m-2">
+              <Button onClick={this.resourcesToggle}>All Resources</Button>
+              <Collapse isOpen={this.state.resCollapse}>
+                <Resources resources={this.state.resources} />
+              </Collapse>
+            </li>
+          </ul>
+        </div>
+      </React.Fragment>
     );
   }
   usersToggle() {
